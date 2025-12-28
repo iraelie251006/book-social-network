@@ -1,5 +1,6 @@
 package dev.iraelie.book_social_network.user;
 
+import dev.iraelie.book_social_network.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
@@ -36,6 +37,9 @@ public class User implements UserDetails, Principal {
     private String password;
     private Boolean accountLocked;
     private Boolean enabled;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
