@@ -35,4 +35,8 @@ public class Role {
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+
+    public String getName() {
+        return name;
+    }
 }
