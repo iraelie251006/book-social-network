@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class BeansConfig {
     @Bean
     public AuthenticationProvider authenticationProvider () {
+//        I have to insert UserDetails
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
