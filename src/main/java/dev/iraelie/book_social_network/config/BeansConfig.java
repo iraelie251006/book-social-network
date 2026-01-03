@@ -17,8 +17,6 @@ public class BeansConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider () {
-//        TODO
-//        I have to insert UserDetails
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
