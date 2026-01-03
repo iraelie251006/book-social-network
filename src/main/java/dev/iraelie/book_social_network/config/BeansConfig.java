@@ -1,6 +1,6 @@
 package dev.iraelie.book_social_network.config;
 
-import dev.iraelie.book_social_network.user.CustomUserDetailsService;
+import dev.iraelie.book_social_network.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
