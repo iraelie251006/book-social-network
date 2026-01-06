@@ -1,11 +1,14 @@
 package dev.iraelie.book_social_network.security;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JwtService {
     private long jwtExpiration;
+    private String secretKey;
 
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
@@ -40,6 +44,11 @@ public class JwtService {
                 .claim("authorities", authorities)
                 .signWith(getSignInKey())
                 .compact();
+    }
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
 }
