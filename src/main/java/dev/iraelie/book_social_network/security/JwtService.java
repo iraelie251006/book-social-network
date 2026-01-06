@@ -1,9 +1,12 @@
 package dev.iraelie.book_social_network.security;
 
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +26,20 @@ public class JwtService {
     private String buildToken(
             UserDetails userDetails,
             long jwtExpiration,
-            Map<String, Object> claims) {
-
+            Map<String, Object> extraClaims) {
+        var authorities = userDetails.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+        return Jwts
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .claim("authorities", authorities)
+                .signWith(getSignInKey())
+                .compact();
     }
 
 }
