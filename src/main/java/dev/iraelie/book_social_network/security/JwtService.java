@@ -56,5 +56,5 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public boolean isTokenValid(String token) {}
+    public boolean isTokenValid(String token, UserDetails userDetails) {}
 }
