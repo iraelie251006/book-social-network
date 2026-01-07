@@ -39,6 +39,7 @@ public class JwtService {
                 .map(GrantedAuthority::getAuthority)
                 .toList();
 //        TODO
+//        Check why or find alternative for this deprecated methods.
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
